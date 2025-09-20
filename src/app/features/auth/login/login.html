@@ -1,0 +1,29 @@
+<form [formGroup]="loginForm" (ngSubmit)="submit()">
+  <div>
+    <label>Téléphone</label>
+    <input type="text" formControlName="telephone" placeholder="Ex: 771234567" />
+    <div *ngIf="loginForm.get('telephone')?.invalid && loginForm.get('telephone')?.touched">
+      Numéro de téléphone invalide
+    </div>
+  </div>
+
+  <div>
+    <label>Mot de passe</label>
+    <input type="password" formControlName="password" />
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      Mot de passe requis
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid || submitting">
+    {{ submitting ? 'Connexion...' : 'Se connecter' }}
+  </button>
+
+  <div *ngIf="errorMessage" style="color:red; margin-top:10px;">
+    {{ errorMessage }}
+  </div>
+
+  <p>
+    Pas encore inscrit ? <a routerLink="/signup">Créer un compte</a>
+  </p>
+</form>

@@ -1,0 +1,148 @@
+
+    <div class="app-container">
+        <!-- Background Elements -->
+        <div class="background-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button class="back-btn" onclick="history.back()">
+                    <i data-lucide="arrow-left" class="back-icon"></i>
+                </button>
+                <h1 class="page-title">Déposer de l'argent</h1>
+                <div class="header-spacer"></div>
+            </div>
+
+            <!-- Deposit Card -->
+            <div class="deposit-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <i data-lucide="credit-card" class="deposit-icon"></i>
+                    </div>
+                    <h2 class="card-title">Nouveau dépôt</h2>
+                    <p class="card-subtitle">Effectuez votre dépôt en toute sécurité</p>
+                </div>
+
+                <form class="deposit-form" id="depositForm">
+                    <!-- Phone Number Input -->
+                    <div class="form-group">
+                        <label for="phoneNumber" class="form-label">
+                            <i data-lucide="smartphone" class="label-icon"></i>
+                            Numéro de téléphone
+                        </label>
+                        <div class="input-wrapper">
+                            <div class="country-code">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='24' height='16' fill='%2300853F'/%3E%3Crect width='8' height='16' fill='%23FECB00'/%3E%3Cpath d='M12 8L14 6L12 4L10 6Z' fill='%23CE1126'/%3E%3C/svg%3E" alt="Sénégal" class="flag-icon">
+                                <span class="code-text">+221</span>
+                            </div>
+                            <input 
+                                type="tel" 
+                                id="phoneNumber" 
+                                class="form-input phone-input" 
+                                value="764534523"
+                                placeholder="Entrez votre numéro"
+                                required
+                            >
+                            <div class="input-status" id="phoneStatus">
+                                <i data-lucide="check-circle" class="status-icon success-icon"></i>
+                            </div>
+                        </div>
+                        <div class="input-helper">Numéro valide ✓</div>
+                    </div>
+
+                    <!-- Amount Input -->
+                    <div class="form-group">
+                        <label for="amount" class="form-label">
+                            <i data-lucide="banknote" class="label-icon"></i>
+                            Montant à déposer
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="number" 
+                                id="amount" 
+                                class="form-input amount-input" 
+                                value="100000"
+                                placeholder="0"
+                                min="500"
+                                max="2000000"
+                                required
+                            >
+                            <div class="currency-badge">FCFA</div>
+                        </div>
+                        <div class="input-helper">Minimum: 500 FCFA • Maximum: 2,000,000 FCFA</div>
+                    </div>
+
+                    <!-- Amount Suggestions -->
+                    <div class="amount-suggestions">
+                        <button type="button" class="suggestion-btn" data-amount="5000">5K</button>
+                        <button type="button" class="suggestion-btn" data-amount="10000">10K</button>
+                        <button type="button" class="suggestion-btn" data-amount="25000">25K</button>
+                        <button type="button" class="suggestion-btn" data-amount="50000">50K</button>
+                        <button type="button" class="suggestion-btn" data-amount="100000">100K</button>
+                    </div>
+
+                    <!-- Transaction Summary -->
+                    <div class="transaction-summary">
+                        <h3 class="summary-title">Récapitulatif</h3>
+                        <div class="summary-row">
+                            <span class="summary-label">Montant du dépôt</span>
+                            <span class="summary-value" id="summaryAmount">100,000 FCFA</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Frais de transaction</span>
+                            <span class="summary-value fee-value">Gratuit</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total-row">
+                            <span class="summary-label">Total</span>
+                            <span class="summary-value total-value" id="summaryTotal">100,000 FCFA</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-content">
+                            <i data-lucide="send" class="btn-icon"></i>
+                            <span class="btn-text">Effectuer le dépôt</span>
+                        </span>
+                        <div class="btn-loader">
+                            <div class="loader-spinner"></div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Security Info -->
+            <div class="security-info">
+                <div class="security-item">
+                    <i data-lucide="shield-check" class="security-icon"></i>
+                    <span>Transaction sécurisée SSL</span>
+                </div>
+                <div class="security-item">
+                    <i data-lucide="clock" class="security-icon"></i>
+                    <span>Traitement instantané</span>
+                </div>
+                <div class="security-item">
+                    <i data-lucide="phone-call" class="security-icon"></i>
+                    <span>Support 24/7</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i data-lucide="check-circle" class="success-modal-icon"></i>
+            </div>
+            <h3 class="modal-title">Dépôt réussi !</h3>
+            <p class="modal-message">Votre dépôt de <span id="modalAmount">100,000 FCFA</span> a été effectué avec succès.</p>
+            <button class="modal-btn" onclick="closeModal()">Continuer</button>
+        </div>
+    </div>

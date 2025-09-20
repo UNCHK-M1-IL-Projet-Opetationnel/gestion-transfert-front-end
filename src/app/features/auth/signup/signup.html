@@ -1,0 +1,72 @@
+<form [formGroup]="signupForm" (ngSubmit)="submit()">
+
+  <div>
+    <label>Nom</label>
+    <input type="text" formControlName="nom" />
+    <div *ngIf="signupForm.get('nom')?.invalid && signupForm.get('nom')?.touched">
+      Le nom est requis
+    </div>
+  </div>
+
+  <div>
+    <label>Prénom</label>
+    <input type="text" formControlName="prenom" />
+    <div *ngIf="signupForm.get('prenom')?.invalid && signupForm.get('prenom')?.touched">
+      Le prénom est requis
+    </div>
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+    <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+      Email invalide
+    </div>
+  </div>
+
+  <div>
+    <label>Téléphone</label>
+    <input type="text" formControlName="telephone" />
+    <div *ngIf="signupForm.get('telephone')?.invalid && signupForm.get('telephone')?.touched">
+      Le téléphone est requis
+    </div>
+  </div>
+
+  <div>
+    <label>Mot de passe</label>
+    <input type="password" formControlName="password" />
+    <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+      Mot de passe requis (min 6 caractères)
+    </div>
+  </div>
+
+  <div>
+    <label>Numéro de pièce</label>
+    <input type="text" formControlName="numeroPiece" />
+    <div *ngIf="signupForm.get('numeroPiece')?.invalid && signupForm.get('numeroPiece')?.touched">
+      Numéro de pièce requis
+    </div>
+  </div>
+
+  <div>
+    <label>Photo</label>
+    <input type="file" (change)="onFileChange($event, 'photo')" />
+  </div>
+
+  <div>
+    <label>Photo pièce</label>
+    <input type="file" (change)="onFileChange($event, 'photoPiece')" />
+  </div>
+
+  <button type="submit" [disabled]="signupForm.invalid || submitting">
+    S'inscrire
+  </button>
+
+  <div *ngIf="errorMessage" style="color:red; margin-top:10px;">
+    {{ errorMessage }}
+  </div>
+
+  <p>
+    Déjà inscrit ? <a routerLink="/login">Connectez-vous ici</a>
+  </p>
+</form>

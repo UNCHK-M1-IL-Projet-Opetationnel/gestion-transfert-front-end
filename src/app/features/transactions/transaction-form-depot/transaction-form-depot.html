@@ -1,0 +1,26 @@
+<div class="depot-container">
+    <h2>💸 Dépôt d'argent</h2>
+  
+    <input 
+      type="number" 
+      [(ngModel)]="montant" 
+      placeholder="Montant à déposer"
+      class="input-depot"
+    />
+  
+    <button (click)="onDepot()" class="btn-depot">Déposer</button>
+  
+    <p class="message">{{ message }}</p>
+  
+    <div *ngIf="transaction">
+      <h3>Détails de la transaction :</h3>
+      <ul>
+        <li>ID : {{ transaction.id }}</li>
+        <li>Type : {{ transaction.type }}</li>
+        <li>Montant : {{ transaction.montant }}</li>
+        <li>Date : {{ transaction.date | date:'short' }}</li>
+        <li>Utilisateur : {{ transaction.utilisateurNom }}</li>
+      </ul>
+    </div>
+  </div>
+  

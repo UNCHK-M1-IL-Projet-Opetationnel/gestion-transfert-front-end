@@ -1,0 +1,171 @@
+
+    <div class="page-container">
+        <div class="page-content">
+            <div class="page-header">
+                <h1 class="page-title">Transactions</h1>
+                
+                <!-- Search Bar -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <input type="text" placeholder="Tapez pour rechercher..." class="search-input" id="searchInput">
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">toutes transactions</button>
+                    <button class="filter-btn" data-filter="date">23 février 2025 - 21 juin 2025</button>
+                    <button class="filter-btn" data-filter="text">Recherche de texte</button>
+                    <button class="clear-filters" id="clearFilters">Effacer les filtres</button>
+                </div>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="transactions-card">
+                <div class="table-container">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th class="th-name">Nom</th>
+                                <th class="th-date">Date</th>
+                                <th class="th-status">Statut</th>
+                                <th class="th-amount">Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody">
+                            <tr class="transaction-row" data-name="retrait">
+                                <td class="td-name">
+                                    <div class="transaction-name">Retrait</div>
+                                </td>
+                                <td class="td-date">
+                                    <div class="transaction-time">15h00</div>
+                                    <div class="transaction-date">10 avril 2025</div>
+                                </td>
+                                <td class="td-status">
+                                    <span class="badge badge-success">Effectué</span>
+                                </td>
+                                <td class="td-amount">
+                                    <div class="amount-main">-500 FCFA</div>
+                                    <div class="amount-fee">Pas de frais</div>
+                                </td>
+                            </tr>
+                            <tr class="transaction-row" data-name="de ahmadou ba">
+                                <td class="td-name">
+                                    <div class="transaction-name">De Ahmadou Ba</div>
+                                </td>
+                                <td class="td-date">
+                                    <div class="transaction-time">16h30</div>
+                                    <div class="transaction-date">01 avril 2025</div>
+                                </td>
+                                <td class="td-status">
+                                    <span class="badge badge-success">Effectué</span>
+                                </td>
+                                <td class="td-amount">
+                                    <div class="amount-main positive">+4500 FCFA</div>
+                                    <div class="amount-fee">Pas de frais</div>
+                                </td>
+                            </tr>
+                            <tr class="transaction-row" data-name="à malick sy">
+                                <td class="td-name">
+                                    <div class="transaction-name">À Malick Sy</div>
+                                </td>
+                                <td class="td-date">
+                                    <div class="transaction-time">13h15</div>
+                                    <div class="transaction-date">25 mars 2025</div>
+                                </td>
+                                <td class="td-status">
+                                    <span class="badge badge-success">Effectué</span>
+                                </td>
+                                <td class="td-amount">
+                                    <div class="amount-main">-1000 FCFA</div>
+                                    <div class="amount-fee">10 FCFA</div>
+                                </td>
+                            </tr>
+                            <tr class="transaction-row" data-name="dépôt">
+                                <td class="td-name">
+                                    <div class="transaction-name">Dépôt</div>
+                                </td>
+                                <td class="td-date">
+                                    <div class="transaction-time">19h05</div>
+                                    <div class="transaction-date">15 mars 2025</div>
+                                </td>
+                                <td class="td-status">
+                                    <span class="badge badge-success">Effectué</span>
+                                </td>
+                                <td class="td-amount">
+                                    <div class="amount-main positive">+2000 FCFA</div>
+                                    <div class="amount-fee">Pas de frais</div>
+                                </td>
+                            </tr>
+                            <tr class="transaction-row" data-name="retrait">
+                                <td class="td-name">
+                                    <div class="transaction-name">Retrait</div>
+                                </td>
+                                <td class="td-date">
+                                    <div class="transaction-time">16h02</div>
+                                    <div class="transaction-date">10 mars 2025</div>
+                                </td>
+                                <td class="td-status">
+                                    <span class="badge badge-success">Effectué</span>
+                                </td>
+                                <td class="td-amount">
+                                    <div class="amount-main">-3000 FCFA</div>
+                                    <div class="amount-fee">Pas de frais</div>
+                                </td>
+                            </tr>
+                            <tr class="transaction-row" data-name="à talla sylla">
+                                <td class="td-name">
+                                    <div class="transaction-name">À Talla Sylla</div>
+                                </td>
+                                <td class="td-date">
+                                    <div class="transaction-time">23h00</div>
+                                    <div class="transaction-date">08 mars 2025</div>
+                                </td>
+                                <td class="td-status">
+                                    <span class="badge badge-cancelled">Annulé</span>
+                                </td>
+                                <td class="td-amount">
+                                    <div class="amount-main">-1500 FCFA</div>
+                                    <div class="amount-fee">15 FCFA</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" id="firstPage">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="11,17 6,12 11,7" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="18,17 13,12 18,7" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <button class="pagination-btn" id="prevPage">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="15,18 9,12 15,6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <button class="pagination-btn page-number" data-page="1">1</button>
+                    <button class="pagination-btn page-number active" data-page="2">2</button>
+                    <button class="pagination-btn page-number" data-page="3">3</button>
+                    <button class="pagination-btn" id="nextPage">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="9,18 15,12 9,6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <button class="pagination-btn" id="lastPage">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="13,17 18,12 13,7" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="6,17 11,12 6,7" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
