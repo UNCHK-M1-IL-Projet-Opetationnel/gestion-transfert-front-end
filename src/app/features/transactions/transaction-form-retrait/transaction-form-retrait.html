@@ -1,35 +1,40 @@
-<div class="retrait-container">
-    <h2>💸 Effectuer un Retrait</h2>
-  
-    <!-- Formulaire -->
-    <form #retraitForm="ngForm" (ngSubmit)="onRetrait(retraitForm)">
-      <div class="form-group">
-        <label for="montant">Montant à retirer</label>
-        <input
-          type="number"
-          id="montant"
-          name="montant"
-          [(ngModel)]="montant"
-          required
-          min="1"
-          class="form-control"
-        />
-      </div>
-      <button type="submit" [disabled]="!retraitForm.form.valid" class="btn">
-        Retirer
-      </button>
-    </form>
-  
-    <!-- Message d'erreur -->
-    <div *ngIf="erreur" class="error">
-      ❌ {{ erreur }}
+<div class="retrait-container bg-white p-8 rounded-lg shadow-md max-w-md mx-auto">
+  <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">💸 Effectuer un Retrait</h2>
+
+  <form #retraitForm="ngForm" (ngSubmit)="onRetrait(retraitForm)" class="space-y-4">
+    <div class="form-group">
+      <label for="montant" class="block text-sm font-medium text-gray-700 mb-2">Montant à retirer</label>
+      <input
+        type="number"
+        id="montant"
+        name="montant"
+        [(ngModel)]="montant"
+        required
+        min="1"
+        class="form-control w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
-  
-    <!-- Message de succès -->
-    <div *ngIf="transaction" class="success">
-      Retrait de {{ transaction.montant }} FCFA effectué avec succès !
-  
-      <h3>Détails de la transaction :</h3>
+    <button 
+      type="submit" 
+      [disabled]="!retraitForm.form.valid" 
+      class="btn w-full font-semibold py-3 px-4 rounded-md transition duration-300 ease-in-out
+             "
+      [ngClass]="!retraitForm.form.valid ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white cursor-pointer'">
+      Retirer
+    </button>
+  </form>
+
+  <div *ngIf="erreur" class="error mt-4 p-3 bg-red-100 text-red-500 rounded-md font-medium text-center">
+    ❌ {{ erreur }}
+  </div>
+
+  <div *ngIf="transaction" class="success mt-6 border-t border-gray-200 pt-4 text-gray-700">
+    <p class="text-lg font-semibold text-green-600">
+      ✅ Retrait de {{ transaction.montant }} FCFA effectué avec succès !
+    </p>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">Détails de la transaction :</h3>
+    <div class="space-y-1 text-sm">
       <p><strong>ID :</strong> {{ transaction.id }}</p>
       <p><strong>Type :</strong> {{ transaction.type }}</p>
       <p><strong>Montant :</strong> {{ transaction.montant }} FCFA</p>
@@ -39,4 +44,4 @@
       <p><strong>Destinataire :</strong> {{ transaction.destinataireTelephone || 'N/A' }}</p>
     </div>
   </div>
-  
+</div>

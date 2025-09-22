@@ -1,36 +1,134 @@
-<div class="transactions-container">
-    <h2>📜 Mes Transactions</h2>
-  
-    <!-- Champ de recherche -->
-    <input
-      type="text"
-      placeholder="Rechercher une transaction"
-      [(ngModel)]="recherche"
-      (ngModelChange)="onRechercheChange()"
-    />
-  
-    <!-- Message si aucune transaction filtrée -->
-    <div *ngIf="transactionsFiltrees.length === 0">
-      Aucune transaction trouvée.
+<div class="p-6 md:p-8 bg-gray-50 min-h-screen font-sans antialiased text-gray-800">
+  <div class="max-w-6xl mx-auto space-y-8">
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-500">Montant Total</p>
+          <p class="text-2xl font-bold text-gray-900 mt-1">{{ montantTotal | number }} FCFA</p>
+        </div>
+        <div class="p-3 bg-blue-100 rounded-full text-blue-500">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8a3 3 0 100 6m-7-2a4 4 0 014-4h.286a2 2 0 012 2v.429a2 2 0 01-2 2H11a4 4 0 01-4-4z"></path></svg>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-500">Nb. de Transferts</p>
+          <p class="text-2xl font-bold text-gray-900 mt-1">{{ nombreTransferts }}</p>
+        </div>
+        <div class="p-3 bg-green-100 rounded-full text-green-500">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-500">Nb. de Dépôts</p>
+          <p class="text-2xl font-bold text-gray-900 mt-1">{{ nombreDepots }}</p>
+        </div>
+        <div class="p-3 bg-indigo-100 rounded-full text-indigo-500">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-500">Nb. de Retraits</p>
+          <p class="text-2xl font-bold text-gray-900 mt-1">{{ nombreRetraits }}</p>
+        </div>
+        <div class="p-3 bg-red-100 rounded-full text-red-500">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-9V4"></path></svg>
+        </div>
+      </div>
+      
     </div>
-  
-    <!-- Liste des transactions filtrées -->
-    <ul *ngIf="transactionsFiltrees.length > 0">
-      <li *ngFor="let t of transactionsFiltrees">
-        <strong>{{ t.type }}</strong> -
-        Montant : {{ t.montant | number }} FCFA -
-        Frais : {{ t.frais | number }} FCFA -
-        Date : {{ t.date | date:'short' }} -
-        Expéditeur : {{ t.expediteurTelephone || '-' }} -
-        Destinataire : {{ t.destinataireTelephone || '-' }}
-        <button (click)="voirDetail(t.id)">Voir Détail</button>
-        <button (click)="voirRecu(t.id)">Voir Reçu</button>
-      </li>
-    </ul>
-  
-    <!-- Affichage erreur si existante -->
-    <div *ngIf="erreur" class="error-message">
-      Erreur : {{ erreur }}
+
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div class="p-6 sm:p-8">
+        
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-3xl font-bold text-gray-900">📜 Mes Transactions</h2>
+          <input
+            type="text"
+            placeholder="Rechercher une transaction..."
+            class="w-full sm:w-1/2 px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out"
+            [(ngModel)]="recherche"
+            (ngModelChange)="onRechercheChange()"
+          />
+        </div>
+
+        <div *ngIf="transactionsFiltrees.length === 0" class="p-4 bg-gray-100 rounded-lg text-center text-gray-500">
+          <p>Aucune transaction trouvée. 🧐</p>
+        </div>
+
+        <ul *ngIf="transactionsPaginees.length > 0" class="space-y-4">
+          <li *ngFor="let t of transactionsPaginees" class="p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition duration-300 ease-in-out">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+              <div class="flex-1 mb-2 sm:mb-0">
+                <div class="font-semibold text-lg text-gray-900">
+                  {{ t.type }}
+                </div>
+                <div class="text-sm text-gray-600">
+                  <span class="font-medium">Montant:</span> {{ t.montant | number }} FCFA •
+                  <span class="font-medium">Date:</span> {{ t.date | date:'short' }}
+                </div>
+                <div class="text-xs text-gray-500 mt-1">
+                  <span class="font-medium">Expéditeur:</span> {{ t.expediteurTelephone || '-' }} •
+                  <span class="font-medium">Destinataire:</span> {{ t.destinataireTelephone || '-' }}
+                </div>
+              </div>
+              <div class="flex space-x-2 mt-2 sm:mt-0">
+                <button (click)="voirDetail(t.id)" class="px-3 py-1 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md transition duration-300">
+                  Détail
+                </button>
+                <button (click)="voirRecu(t.id)" class="px-3 py-1 text-sm font-medium text-blue-500 border border-blue-500 hover:bg-blue-50 rounded-md transition duration-300">
+                  Reçu
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="flex justify-center mt-6 space-x-2" *ngIf="totalPages > 1">
+          <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            Précédent
+          </button>
+          <button *ngFor="let page of pages" (click)="goToPage(page)" [class.bg-blue-500]="currentPage === page" [class.text-white]="currentPage === page" [class.bg-gray-200]="currentPage !== page" [class.text-gray-700]="currentPage !== page" class="px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-300">
+            {{ page }}
+          </button>
+          <button (click)="goToNextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            Suivant
+          </button>
+        </div>
+      </div>
     </div>
+    
+    <div *ngIf="erreur" class="p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg text-center">
+      Erreur : {{ erreur }} ⚠️
+    </div>
+
   </div>
-  
+</div>
+
+<div *ngIf="transactionDetail" class="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 sm:p-8 relative">
+    
+    <button (click)="fermerDetail()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    
+    <h3 class="text-2xl font-bold mb-4 text-gray-900">
+      📌 Détail de la transaction #{{ transactionDetail.id }}
+    </h3>
+    <ul class="space-y-3 text-gray-700">
+      <li><strong>Type :</strong> <span class="font-medium">{{ transactionDetail.type }}</span></li>
+      <li><strong>Montant :</strong> <span class="font-medium">{{ transactionDetail.montant | number }} FCFA</span></li>
+      <li><strong>Frais :</strong> <span class="font-medium">{{ transactionDetail.frais | number }} FCFA</span></li>
+      <li><strong>Date :</strong> <span class="font-medium">{{ transactionDetail.date | date:'short' }}</span></li>
+      <li><strong>Expéditeur :</strong> <span class="font-medium">{{ transactionDetail.expediteurTelephone || '-' }}</span></li>
+      <li><strong>Destinataire :</strong> <span class="font-medium">{{ transactionDetail.destinataireTelephone || '-' }}</span></li>
+    </ul>
+  </div>
+</div>

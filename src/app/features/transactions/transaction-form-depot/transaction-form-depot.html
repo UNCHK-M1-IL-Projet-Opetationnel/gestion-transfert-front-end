@@ -1,26 +1,33 @@
-<div class="depot-container">
-  <h2>💸 Dépôt d'argent</h2>
+<div class="depot-container bg-white p-8 rounded-lg shadow-md max-w-md mx-auto">
+  <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">💸 Dépôt d'argent</h2>
 
-  <!-- ✅ Passer le NgForm en paramètre -->
-  <form (ngSubmit)="onDepot(depotForm)" #depotForm="ngForm">
+  <form (ngSubmit)="onDepot(depotForm)" #depotForm="ngForm" class="space-y-4">
     <input 
       type="number" 
       [(ngModel)]="montant" 
       name="montant"
       placeholder="Montant à déposer"
-      class="input-depot"
+      class="input-depot w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       required
       min="1"
     />
 
-    <button type="submit" class="btn-depot">Déposer</button>
+    <button 
+      type="submit" 
+      class="btn-depot w-full bg-blue-600 text-white font-semibold p-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
+    >
+      Déposer
+    </button>
   </form>
 
-  <p class="message">{{ message }}</p>
+  <p class="message mt-4 text-center" 
+     [ngClass]="{'text-green-600': message === 'Dépôt réussi', 'text-red-600': message !== 'Dépôt réussi' }">
+    {{ message }}
+  </p>
 
-  <div *ngIf="transaction">
-    <h3>Détails de la transaction :</h3>
-    <ul>
+  <div *ngIf="transaction" class="mt-6 border-t border-gray-200 pt-4">
+    <h3 class="text-lg font-semibold mb-2 text-gray-700">Détails de la transaction :</h3>
+    <ul class="list-disc list-inside space-y-1 text-gray-600">
       <li>ID : {{ transaction.id }}</li>
       <li>Type : {{ transaction.type }}</li>
       <li>Montant : {{ transaction.montant | number }} FCFA</li>

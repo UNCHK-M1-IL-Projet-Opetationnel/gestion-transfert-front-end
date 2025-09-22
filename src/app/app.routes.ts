@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 
 // Layout principal
 import { Layout } from './features/layout/layout';
-import { Login } from './features/auth/login/login';
-import { Signup } from './features/auth/signup/signup';
 import { TransactionList } from './features/transactions/transaction-list/transaction-list';
 import { TransactionRecu } from './features/transactions/transaction-recu/transaction-recu';
 import { TransactionMine } from './features/transactions/transaction-mine/transaction-mine';
@@ -18,6 +16,8 @@ import { AbonnementMine } from './features/abonnements/abonnement-mine/abonnemen
 import { AbonnementActifs } from './features/abonnements/abonnement-actifs/abonnement-actifs';
 import { Profil } from './features/utilisateurs/profil/profil';
 import { authGuard } from './core/auth-guard';
+import { Login } from './features/auth/login/login';
+import { Signup } from './features/auth/signup/signup';
 
 // Auth
 
@@ -54,7 +54,7 @@ export const routes: Routes = [
       { path: 'profil', component: Profil },
 
       // Redirection par défaut vers la page principale après login
-      { path: '', redirectTo: 'transactions', pathMatch: 'full' }
+      { path: '', redirectTo: 'login', pathMatch: 'full' }
     ]
   },
 
