@@ -24,7 +24,7 @@ interface StatsCard {
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet, RouterLink],
   templateUrl: './layout.html',
   styleUrls: ['./layout.css']  // corrigé ici
 })

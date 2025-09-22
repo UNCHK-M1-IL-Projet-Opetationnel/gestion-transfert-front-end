@@ -5,9 +5,7 @@ import { Layout } from './features/layout/layout';
 import { Login } from './features/auth/login/login';
 import { Signup } from './features/auth/signup/signup';
 import { TransactionList } from './features/transactions/transaction-list/transaction-list';
-import { TransactionDetail } from './features/transactions/transaction-detail/transaction-detail';
 import { TransactionRecu } from './features/transactions/transaction-recu/transaction-recu';
-import { TransactionByUser } from './features/transactions/transaction-by-user/transaction-by-user';
 import { TransactionMine } from './features/transactions/transaction-mine/transaction-mine';
 import { TransactionFormDepot } from './features/transactions/transaction-form-depot/transaction-form-depot';
 import { TransactionFormRetrait } from './features/transactions/transaction-form-retrait/transaction-form-retrait';
@@ -36,9 +34,7 @@ export const routes: Routes = [
     children: [
       // Transactions
       { path: 'transactions', component: TransactionList },
-      { path: 'transactions/:id', component: TransactionDetail },
       { path: 'transactions/:id/recu', component: TransactionRecu },
-      { path: 'transactions/utilisateur/:telephone', component: TransactionByUser },
       { path: 'transactions/me', component: TransactionMine },
 
       // Formulaires

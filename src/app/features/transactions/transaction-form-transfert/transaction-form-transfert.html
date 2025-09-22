@@ -1,1 +1,23 @@
-<p>transaction-form-transfert works!</p>
+<div>
+  <h2>Effectuer un transfert</h2>
+
+  <form #transfertForm="ngForm" (ngSubmit)="onTransfert(transfertForm)">
+    <label>Téléphone destinataire</label>
+    <input type="text" [(ngModel)]="destinataireTelephone" name="destinataireTelephone" required />
+
+    <label>Montant</label>
+    <input type="number" [(ngModel)]="montant" name="montant" required />
+
+    <button type="submit" [disabled]="!transfertForm.form.valid">Transférer</button>
+  </form>
+
+  <p *ngIf="message">{{ message }}</p>
+
+  <div *ngIf="transaction">
+    <h3>Détails :</h3>
+    <p>ID: {{ transaction.id }}</p>
+    <p>Type: {{ transaction.type }}</p>
+    <p>Montant: {{ transaction.montant }}</p>
+    <p>Date: {{ transaction.date | date:'short' }}</p>
+  </div>
+</div>

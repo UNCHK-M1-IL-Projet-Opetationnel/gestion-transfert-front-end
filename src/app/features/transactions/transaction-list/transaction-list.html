@@ -1,1 +1,36 @@
-<p>transaction-list works!</p>
+<div class="transactions-container">
+    <h2>📜 Mes Transactions</h2>
+  
+    <!-- Champ de recherche -->
+    <input
+      type="text"
+      placeholder="Rechercher une transaction"
+      [(ngModel)]="recherche"
+      (ngModelChange)="onRechercheChange()"
+    />
+  
+    <!-- Message si aucune transaction filtrée -->
+    <div *ngIf="transactionsFiltrees.length === 0">
+      Aucune transaction trouvée.
+    </div>
+  
+    <!-- Liste des transactions filtrées -->
+    <ul *ngIf="transactionsFiltrees.length > 0">
+      <li *ngFor="let t of transactionsFiltrees">
+        <strong>{{ t.type }}</strong> -
+        Montant : {{ t.montant | number }} FCFA -
+        Frais : {{ t.frais | number }} FCFA -
+        Date : {{ t.date | date:'short' }} -
+        Expéditeur : {{ t.expediteurTelephone || '-' }} -
+        Destinataire : {{ t.destinataireTelephone || '-' }}
+        <button (click)="voirDetail(t.id)">Voir Détail</button>
+        <button (click)="voirRecu(t.id)">Voir Reçu</button>
+      </li>
+    </ul>
+  
+    <!-- Affichage erreur si existante -->
+    <div *ngIf="erreur" class="error-message">
+      Erreur : {{ erreur }}
+    </div>
+  </div>
+  

@@ -1,26 +1,31 @@
 <div class="depot-container">
-    <h2>💸 Dépôt d'argent</h2>
-  
+  <h2>💸 Dépôt d'argent</h2>
+
+  <!-- ✅ Passer le NgForm en paramètre -->
+  <form (ngSubmit)="onDepot(depotForm)" #depotForm="ngForm">
     <input 
       type="number" 
       [(ngModel)]="montant" 
+      name="montant"
       placeholder="Montant à déposer"
       class="input-depot"
+      required
+      min="1"
     />
-  
-    <button (click)="onDepot()" class="btn-depot">Déposer</button>
-  
-    <p class="message">{{ message }}</p>
-  
-    <div *ngIf="transaction">
-      <h3>Détails de la transaction :</h3>
-      <ul>
-        <li>ID : {{ transaction.id }}</li>
-        <li>Type : {{ transaction.type }}</li>
-        <li>Montant : {{ transaction.montant }}</li>
-        <li>Date : {{ transaction.date | date:'short' }}</li>
-        <li>Utilisateur : {{ transaction.utilisateurNom }}</li>
-      </ul>
-    </div>
+
+    <button type="submit" class="btn-depot">Déposer</button>
+  </form>
+
+  <p class="message">{{ message }}</p>
+
+  <div *ngIf="transaction">
+    <h3>Détails de la transaction :</h3>
+    <ul>
+      <li>ID : {{ transaction.id }}</li>
+      <li>Type : {{ transaction.type }}</li>
+      <li>Montant : {{ transaction.montant | number }} FCFA</li>
+      <li>Date : {{ transaction.date | date:'short' }}</li>
+      <li>Utilisateur : {{ transaction.utilisateurNom || '-' }}</li>
+    </ul>
   </div>
-  
+</div>

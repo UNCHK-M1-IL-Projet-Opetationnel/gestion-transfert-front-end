@@ -1,1 +1,29 @@
-<p>transaction-form works!</p>
+<div class="transactions-container">
+  <h2>📋 Mes Transactions</h2>
+
+  <div *ngIf="erreur" class="error">❌ {{ erreur }}</div>
+
+  <!-- Liste -->
+  <ul>
+    <li *ngFor="let t of transactions">
+      {{ t.id }} - {{ t.type }} - {{ t.montant }} FCFA
+      <button (click)="voirDetail(t.id)">Détails</button>
+      <button (click)="voirRecu(t.id)">Reçu</button>
+    </li>
+  </ul>
+
+  <!-- Détail -->
+  <div *ngIf="transactionDetail">
+    <h3>Détails Transaction</h3>
+    <p>ID : {{ transactionDetail.id }}</p>
+    <p>Type : {{ transactionDetail.type }}</p>
+    <p>Montant : {{ transactionDetail.montant }}</p>
+    <p>Date : {{ transactionDetail.date | date:'short' }}</p>
+  </div>
+
+  <!-- Reçu -->
+  <div *ngIf="recu">
+    <h3>Reçu</h3>
+    <pre>{{ recu | json }}</pre>
+  </div>
+</div>

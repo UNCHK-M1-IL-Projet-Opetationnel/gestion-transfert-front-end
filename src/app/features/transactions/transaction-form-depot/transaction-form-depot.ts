@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TransactionDto, TransactionService } from '../service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,27 +17,24 @@ export class TransactionFormDepot {
 
   constructor(private transactionService: TransactionService) {}
 
-  onDepot() {
+  onDepot(form: NgForm) {
     if (this.montant <= 0) {
       this.message = "Le montant doit être supérieur à 0.";
       return;
     }
   
-    try {
-      this.transactionService.effectuerDepot(this.montant).subscribe({
-        next: res => {
-          this.transaction = res;
-          this.message = `✅ Dépôt de ${res.montant} effectué avec succès !`;
-        },
-        error: err => {
-          console.error(err);
-          this.message = "❌ Erreur lors du dépôt.";
-        }
-      });
-    } catch (error) {
-      console.error(error);
-      this.message = "❌ Utilisateur non connecté !";
-    }
+    this.transactionService.effectuerDepot(this.montant).subscribe({
+      next: res => {
+        this.transaction = res;
+        this.message = `✅ Dépôt de ${res.montant} effectué avec succès !`;
+
+        // ✅ Réinitialiser tout le formulaire
+        form.resetForm();
+      },
+      error: err => {
+        console.error(err);
+        this.message = "❌ Erreur lors du dépôt.";
+      }
+    });
   }
-  
 }
